@@ -4,7 +4,14 @@ React version ^18.2.0
 + Node.js -- v20.9.0
 + Visual Code for Window
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules. Beside i've also installed some plugins develop the frontend regularly as
+
+# Standard Plugin 
+- React Router [Tutorial for install](https://reactrouter.com/en/main/start/tutorial)
+- Axios. Call API [Tutorial for install](https://www.npmjs.com/package/axios#example)
+- Tailwind CSS. [Tutorial for install here](https://tailwindcss.com/docs/guides/vite). You need some reference class from Tailwind, can get this [link](https://nerdcave.com/tailwind-cheat-sheet)
+- Icon Set of [Heroicons](https://heroicons.com/).
+
 
 # Start
 In the project root directory, you can run:
