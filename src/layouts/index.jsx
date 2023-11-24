@@ -1,8 +1,15 @@
-import { Outlet} from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { Alert } from "../components/alert";
+import { history } from "../helpers";
 export default function Layout() {
-    return (
-      <>
-          <Outlet />
-      </>
-    );
-  }
+  history.navigate = useNavigate();
+  history.location = useLocation();
+  return (
+    <><div>
+      <Alert />
+      <Outlet />
+    </div>
+
+    </>
+  );
+}

@@ -9,6 +9,9 @@ import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router"
 
 import { Provider } from 'react-redux';
 
+import { PrivateRoute } from './components/private-router';
+import { store } from './store';
+
 import Layout from './layouts'
 import ErrorPage from './pages/404'
 
@@ -16,13 +19,19 @@ import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
 import ForgotPasswordPage from './pages/forgot-password';
 import ResetPasswordPage from './pages/reset-password';
+
+import DefaultPage from './pages/default';
 import './index.css'
+
+import { fakeBackend } from './helpers';
+
+fakeBackend();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />} errorElement={<ErrorPage />}>
       <Route
-        path="/"
+        path="/login"
         element={<LoginPage />}
       />
       <Route
@@ -37,13 +46,17 @@ const router = createBrowserRouter(
         path="reset-password"
         element={<ResetPasswordPage />}
       />
-      <Route>
-        <Route />
+      {/* private */}
+      <Route element={<PrivateRoute />}>
+        <Route path="/" element={<DefaultPage />} />
       </Route>
     </Route>
   )
 );
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+  
 );
 

@@ -8,6 +8,18 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Uncaught ReferenceError: process is not defined auth.slice.js. Using it like for charm. A hack solution from Polymer's PWA Starter kits-->
+    <script>
+      // HACK(keanulee): The Redux package assumes `process` exists - mock it here before
+      // the module is loaded.
+      window.process = {
+        env: {
+          NODE_ENV: 'production'
+        }
+      };
+    </script>
+    
+    
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
