@@ -17,3 +17,16 @@ function PrivateRoute() {
     // authorized so return outlet for child routes
     return <Outlet />;
 }
+
+// export default function PrivateRoute() {
+//     const auth = useSelector(x => x.auth.value);
+//     return (
+//         <>
+//         {!auth && <Navigate to="/login" state={{ from: history.location }} />}
+//         {auth }
+        
+        
+        
+//         </>
+//     )
+// }
