@@ -9,6 +9,8 @@ import LoadingComponent from "../../components/loading";
 
 import { authActions } from "../../store";
 
+
+
 export default function LoginPage() {
     const dispatch = useDispatch();
     // form validation rules 
@@ -56,7 +58,7 @@ export default function LoginPage() {
                                 </div>
                                 <Link to="/forgot-password" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</Link>
                             </div>
-                            <button disabled={isSubmitting} type="submit" className="w-full text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">  {isSubmitting && <LoadingComponent />}Sign in</button>
+                            <button disabled={isSubmitting} type="submit" className="flex justify-center w-full text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">  {isSubmitting && <LoadingComponent width={20} height={20} />} {!isSubmitting && <span>Sign in</span> }</button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 Don’t have an account yet?  <Link to="/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
                             </p>

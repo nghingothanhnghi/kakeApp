@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import LoadingComponent from '../loading';
 import { useDispatch } from 'react-redux';
 export default function UserListComponent({ users, userActions }) {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function UserListComponent({ users, userActions }) {
                                 <Link to={`edit/${user.id}`} className="btn btn-sm btn-primary me-1">Edit</Link>
                                 <button onClick={() => dispatch(userActions.delete(user.id))} className="btn btn-sm btn-danger" style={{ width: '60px' }} disabled={user.isDeleting}>
                                     {user.isDeleting
-                                        ? <span className="spinner-border spinner-border-sm"></span>
+                                        ? <LoadingComponent width={11} height={11} />
                                         : <span>Delete</span>
                                     }
                                 </button>

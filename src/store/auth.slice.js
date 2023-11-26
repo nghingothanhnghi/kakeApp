@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { useNavigate } from 'react-router-dom';
 import { alertActions } from './alert.slice';
 import { history, fetchWrapper } from '../helpers';
 
@@ -37,6 +36,7 @@ function createReducers() {
 
 function createExtraActions() {
     const baseUrl = `${process.env.REACT_APP_API_URL}/users`;
+   
     return {
         login: login(),
         logout: logout()
@@ -49,7 +49,7 @@ function createExtraActions() {
                 dispatch(alertActions.clear());
                 try {
                     const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password });
-
+                    console.log(user, 'baseUrl Login')
                     // set auth user in redux state
                     dispatch(authActions.setAuth(user));
 
