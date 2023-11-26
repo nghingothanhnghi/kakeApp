@@ -21,10 +21,12 @@ import ForgotPasswordPage from './pages/forgot-password';
 import ResetPasswordPage from './pages/reset-password';
 
 import DefaultPage from './pages/default';
+import UsersPage from './pages/users';
+import AddEditUserPage from './pages/users/add-edit';
 import './index.css'
 
+// setup fake backend
 import { fakeBackend } from './helpers';
-
 fakeBackend();
 
 const router = createBrowserRouter(
@@ -49,6 +51,11 @@ const router = createBrowserRouter(
       {/* private */}
       <Route element={<PrivateRoute />}>
         <Route path="/" element={<DefaultPage />} />
+        <Route  element={<UsersPage />}>
+          <Route index path="users/" element={<UsersPage />} />
+          <Route path="edit/:id" element={<AddEditUserPage />} />     
+        </Route>
+       
       </Route>
     </Route>
   )
@@ -57,6 +64,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <RouterProvider router={router} />
   </Provider>
-  
 );
 
