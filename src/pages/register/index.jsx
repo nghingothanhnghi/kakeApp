@@ -10,9 +10,19 @@ import { Branding } from "../../components/logo";
 // import { history } from '../../helpers';
 // import { userActions, alertActions } from '../../store';
 
+import { login } from "../../slices/auth";
+import { clearMessage } from "../../slices/message";
+
 
 export default function RegisterPage() {
-    const dispatch = useDispatch();
+    const [successful, setSuccessful] = useState(false);
+
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
 
     // form validation rules 
     const validationSchema = Yup.object().shape({
@@ -41,15 +51,17 @@ export default function RegisterPage() {
     const { errors, isSubmitting } = formState;
 
     async function onSubmit(data) {
-        dispatch(alertActions.clear());
+        setSuccessful(false);
         try {
-            await dispatch(userActions.register(data)).unwrap();
+            await dispatch(register({fullName, username, email, phone, password })).unwrap();
 
             // redirect to login page and display success alert
-            history.navigate('/login');
-            dispatch(alertActions.success({ message: 'Registration successful', showAfterRedirect: true }));
+            // history.navigate('/login');
+            // dispatch(alertActions.success({ message: 'Registration successful', showAfterRedirect: true }));
+            setSuccessful(true);
         } catch (error) {
-            dispatch(alertActions.error(error));
+            // dispatch(alertActions.error(error));
+            setSuccessful(false);
         }
     }
 
