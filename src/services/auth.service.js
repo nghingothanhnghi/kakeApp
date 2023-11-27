@@ -2,28 +2,30 @@ import axios from "axios";
 
 const API_URL = "https://hexb6gqxh9.execute-api.us-east-2.amazonaws.com/develop/authenticate";
 
-const register = (username, email, password) => {
+const register = (fullName, username, email, phone, password) => {
   return axios.post(API_URL + "/sign-up", {
+    fullName,
     username,
     email,
+    phone,
     password,
   });
 };
 
-const login = (username, password) => {
-  return axios
-    .post(API_URL + "/login", {
-      username,
-      password,
-    })
-    .then((response) => {
-      if (response.data.accessToken) {
+const login = async (username, password) => {
+  const response = await axios
+        .post(API_URL + "/login", {
+            username,
+            password,
+        });
+    if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
-      }
-
-      return response.data;
-    });
+    }
+    // return response.data;
+    console.log(response.data, "Response Login")
 };
+
+
 
 const logout = () => {
   localStorage.removeItem("user");

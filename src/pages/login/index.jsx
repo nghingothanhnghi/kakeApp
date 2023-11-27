@@ -38,7 +38,7 @@ export default function LoginPage() {
 
     function onSubmit({ username, password }) {
         // return dispatch(authActions.login({ username, password }));
-        return dispatch(login({ username, password }))
+        dispatch(login({ username, password }))
     }
 
     console.log(onSubmit)
