@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Branding } from "../../components/logo";
 import LoadingComponent from "../../components/loading";
 
-// import { authActions } from "../../store";
-
 import { login } from "../../slices/auth";
 import { clearMessage } from "../../slices/message";
 
@@ -40,14 +38,7 @@ export default function LoginPage() {
 
     function onSubmit({ username, password }) {
         // return dispatch(authActions.login({ username, password }));
-        return dispatch(login({ username, password })).unwrap()
-            .then(() => {
-                navigate("/users");
-                //   window.location.reload();
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+        return dispatch(login({ username, password }))
     }
 
     console.log(onSubmit)
