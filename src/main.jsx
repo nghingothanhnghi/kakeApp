@@ -9,8 +9,8 @@ import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router"
 
 import { Provider } from 'react-redux';
 
-import { PrivateRoute } from './components/private-router';
-import { store } from './store';
+// import { PrivateRoute } from './components/private-router';
+import store from './store/store';
 
 import Layout from './layouts'
 import ErrorPage from './pages/404'
@@ -26,8 +26,8 @@ import AddEditUserPage from './pages/users/add-edit';
 import './index.css'
 
 // setup fake backend
-import { fakeBackend } from './helpers';
-fakeBackend();
+// import { fakeBackend } from './helpers';
+// fakeBackend();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,26 +37,31 @@ const router = createBrowserRouter(
         element={<LoginPage />}
       />
       <Route
-        path="register"
+        path="/register"
         element={<RegisterPage />}
       />
       <Route
-        path="forgot-password"
+        path="/forgot-password"
         element={<ForgotPasswordPage />}
       />
       <Route
-        path="reset-password"
+        path="/reset-password"
         element={<ResetPasswordPage />}
       />
+              <Route path="/" element={<DefaultPage />} />
+        <Route  element={<UsersPage />}>
+          <Route index path="users/" element={<UsersPage />} />
+          <Route path="edit/:id" element={<AddEditUserPage />} />     
+        </Route>
       {/* private */}
-      <Route element={<PrivateRoute />}>
+      {/* <Route element={<PrivateRoute />}>
         <Route path="/" element={<DefaultPage />} />
         <Route  element={<UsersPage />}>
           <Route index path="users/" element={<UsersPage />} />
           <Route path="edit/:id" element={<AddEditUserPage />} />     
         </Route>
        
-      </Route>
+      </Route> */}
     </Route>
   )
 );

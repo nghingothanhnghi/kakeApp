@@ -1,18 +1,32 @@
-import { useRouteError, Link } from "react-router-dom";
+import { useRouteError, Link, Navigate, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Branding } from "../../components/logo";
 import LoadingComponent from "../../components/loading";
 
-import { authActions } from "../../store";
+// import { authActions } from "../../store";
 
+import { login } from "../../slices/auth";
+import { clearMessage } from "../../slices/message";
 
 
 export default function LoginPage() {
+    let navigate = useNavigate();
+
+
+    const { isLoggedIn } = useSelector((state) => state.auth);
+    const { message } = useSelector((state) => state.message);
+
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(clearMessage());
+      }, [dispatch]);
+
     // form validation rules 
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required'),
@@ -25,8 +39,14 @@ export default function LoginPage() {
     const { errors, isSubmitting } = formState;
 
     function onSubmit({ username, password }) {
-        return dispatch(authActions.login({ username, password }));
+        // return dispatch(authActions.login({ username, password }));
+        return dispatch(login({ username, password }));
     }
+
+    if (isLoggedIn) {
+        return <Navigate to="/users" />;
+      }
+
     return (
         <form className="bg-gray-50 dark:bg-gray-900" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

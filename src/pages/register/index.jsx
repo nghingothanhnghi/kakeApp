@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux';
 
 import { Branding } from "../../components/logo";
 
-import { history } from '../../helpers';
-import { userActions, alertActions } from '../../store';
+// import { history } from '../../helpers';
+// import { userActions, alertActions } from '../../store';
 
 
 export default function RegisterPage() {
@@ -63,36 +63,48 @@ export default function RegisterPage() {
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Create and account
                             </h1>
-                            <form className="space-y-2 md:space-y-1" onSubmit={handleSubmit(onSubmit)}>
+                            <form className="space-y-2 md:space-y-2" onSubmit={handleSubmit(onSubmit)}>
                                 <div>
                                     <label htmlFor="fullname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your FullName</label>
                                     <input type="fullname" name="fullname" {...register('fullName')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.fullName ? 'is-invalid ' : ''}`} required="" />
                                     <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.fullName?.message}</div>
                                 </div>
-                                <div>
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                    <input type="email" name="email" {...register('email')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.email ? 'is-invalid ' : ''}`} />
-                                    <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.email?.message}</div>
-                                </div>
-                                <div>
-                                    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your phone</label>
-                                    <input type="phone" name="phone" {...register('phone')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.phone ? 'is-invalid' : ''}`} />
-                                    <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.phone?.message}</div>
+                                <div class="flex flex-row gap-x-2">
+                                    <div class="basis-1/2">
+                                        <div>
+                                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                                            <input type="email" name="email" {...register('email')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.email ? 'is-invalid ' : ''}`} />
+                                            <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.email?.message}</div>
+                                        </div>
+                                    </div>
+                                    <div class="basis-1/2">
+                                        <div>
+                                            <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your phone</label>
+                                            <input type="phone" name="phone" {...register('phone')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.phone ? 'is-invalid' : ''}`} />
+                                            <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.phone?.message}</div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                                     <input type="text" name="username" {...register('username')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.username ? 'is-invalid' : ''}`} />
                                     <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.username?.message}</div>
                                 </div>
-                                <div>
-                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                    <input type="password" name="password" {...register('password')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.password ? 'is-invalid' : ''}`} />
-                                    <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.password?.message}</div>
-                                </div>
-                                <div>
-                                    <label htmlFor="cpassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                                    <input type="password" name="cpassword" {...register('cpassword')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.cpassword ? 'is-invalid' : ''}`} />
-                                    <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.cpassword?.message}</div>
+                                <div class="flex flex-row gap-x-2">
+                                    <div class="basis-1/2">
+                                        <div>
+                                            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                            <input type="password" name="password" {...register('password')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.password ? 'is-invalid' : ''}`} />
+                                            <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.password?.message}</div>
+                                        </div>
+                                    </div>
+                                    <div class="basis-1/2">
+                                        <div>
+                                            <label htmlFor="cpassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+                                            <input type="password" name="cpassword" {...register('cpassword')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.cpassword ? 'is-invalid' : ''}`} />
+                                            <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.cpassword?.message}</div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="flex items-start">
                                     <div className="flex items-center h-5">
