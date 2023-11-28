@@ -10,7 +10,7 @@ import { Branding } from "../../components/logo";
 // import { history } from '../../helpers';
 // import { userActions, alertActions } from '../../store';
 
-import { login } from "../../slices/auth";
+import { registeUser } from "../../slices/auth";
 import { clearMessage } from "../../slices/message";
 
 
@@ -51,17 +51,14 @@ export default function RegisterPage() {
     const { errors, isSubmitting } = formState;
 
     async function onSubmit({ fullName, username, email, phone, password, cpassword }) {
+        console.log(fullName, username, email, phone, password, cpassword)
         setSuccessful(false);
         try {
-            dispatch(register({ fullName, username, email, phone, password, cpassword })).unwrap();
+            dispatch(registeUser({ fullName, username, email, phone, password, cpassword })).unwrap();
             setSuccessful(true);
         } catch (error) {
             setSuccessful(false);
         }
-
-
-
-
     }
 
     console.log(onSubmit)

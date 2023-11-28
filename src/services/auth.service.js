@@ -1,8 +1,9 @@
 import axios from "axios";
 
+// real API
 const API_URL = "https://hexb6gqxh9.execute-api.us-east-2.amazonaws.com/develop/authenticate";
 
-const register = (fullName, username, email, phone, password) => {
+const registeUser = (fullName, username, email, phone, password) => {
   return axios.post(API_URL + "/sign-up", {
     fullName,
     username,
@@ -10,6 +11,7 @@ const register = (fullName, username, email, phone, password) => {
     phone,
     password,
   });
+
 };
 
 const login = async (username, password) => {
@@ -32,7 +34,7 @@ const logout = () => {
 };
 
 const authService = {
-  register,
+  registeUser,
   login,
   logout,
 };

@@ -15,7 +15,6 @@ import { clearMessage } from "../../slices/message";
 export default function LoginPage() {
     let navigate = useNavigate();
 
-
     const { isLoggedIn } = useSelector((state) => state.auth);
     const { message } = useSelector((state) => state.message);
 
@@ -38,17 +37,23 @@ export default function LoginPage() {
 
     function onSubmit({ username, password }) {
         // return dispatch(authActions.login({ username, password }));
-        dispatch(login({ username, password }))
+        return dispatch(login({ username, password }))
+        .unwrap()
+        .then(() => {
+        navigate("/users");
+        // window.location.reload();
+      })
+      .catch(() => {
+      });
     }
 
-    console.log(onSubmit)
     if (isLoggedIn) {
         return <Navigate to="/users" />;
     }
 
     return (
         <>
-            {message && (
+            {!message && (
                 <div className="form-group">
                     <div className="alert alert-danger" role="alert">
                         {message}
