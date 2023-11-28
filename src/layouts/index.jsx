@@ -1,17 +1,13 @@
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { Alert } from "../components/alert";
-// import { history } from "../helpers";
+import { history } from "../helpers/history";
 export default function Layout() {
-  // history.navigate = useNavigate();
-  // history.location = useLocation();
-    const navigate = useNavigate();
-    const location = useLocation();
+  history.navigate = useNavigate();
+  history.location = useLocation();
   return (
-    <><div>
+    <>
       <Alert />
       <Outlet />
-    </div>
-
     </>
   );
 }
