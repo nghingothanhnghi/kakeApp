@@ -57,6 +57,7 @@ function createReducers() {
     return {
         success,
         error,
+        setMessage,
         clearMessage
     };
 
@@ -77,7 +78,6 @@ function createReducers() {
             showAfterRedirect: action.payload?.showAfterRedirect
         };
     }
-
 
     function setMessage (state, action) {
             return { message: action.payload?.message || action.payload, showAfterRedirect: action.payload?.showAfterRedirect };

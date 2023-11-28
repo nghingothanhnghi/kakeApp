@@ -17,6 +17,7 @@ import ErrorPage from './pages/404'
 
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
+import ConfirmRegisteredPage from './pages/confirm-registered';
 import ForgotPasswordPage from './pages/forgot-password';
 import ResetPasswordPage from './pages/reset-password';
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter(
       <Route
         path="/register"
         element={<RegisterPage />}
+      />
+            <Route
+        path="/success-registeration"
+        element={<ConfirmRegisteredPage />}
       />
       <Route
         path="/forgot-password"

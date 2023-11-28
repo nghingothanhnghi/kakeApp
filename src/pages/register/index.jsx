@@ -17,12 +17,12 @@ import { clearMessage } from "../../slices/message";
 export default function RegisterPage() {
     const [successful, setSuccessful] = useState(false);
 
-    const { message } = useSelector((state) => state.message);
+    // const { message } = useSelector((state) => state.message);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(clearMessage());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(clearMessage());
+    // }, [dispatch]);
 
     // form validation rules 
     const validationSchema = Yup.object().shape({
@@ -65,7 +65,7 @@ export default function RegisterPage() {
 
     return (
         <>
-            {message && (
+            {/* {message && (
                 <div className="form-group">
                     <div
                         className={successful ? "alert alert-success" : "alert alert-danger"}
@@ -74,7 +74,7 @@ export default function RegisterPage() {
                         {message}
                     </div>
                 </div>
-            )}
+            )} */}
             <section className="bg-gray-50 dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <Branding />
