@@ -10,7 +10,14 @@ const registeUser = (fullName, username, email, phone, password) => {
     email,
     phone,
     password,
-  });
+  }).then((res) => {
+    console.log(res.data, "success")
+})
+.catch((err) => {
+    // handle error
+    console.log(err.data, "error")
+})
+
 
 };
 

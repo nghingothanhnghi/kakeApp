@@ -13,16 +13,13 @@ import { clearMessage } from "../../slices/message";
 
 
 export default function LoginPage() {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const { isLoggedIn } = useSelector((state) => state.auth);
     const { message } = useSelector((state) => state.message);
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(clearMessage());
-    }, [dispatch]);
 
     // form validation rules 
     const validationSchema = Yup.object().shape({
@@ -38,34 +35,32 @@ export default function LoginPage() {
     function onSubmit({ username, password }) {
         // return dispatch(authActions.login({ username, password }));
         return dispatch(login({ username, password }))
-        .unwrap()
-        .then(() => {
-        navigate("/users");
-        // window.location.reload();
-      })
-      .catch(() => {
-      });
+            .unwrap()
+            .then((res) => {
+                navigate("/welcome");
+                // window.location.reload();
+                console.log(res, "success")
+            })
+            .catch((err) => {
+                // handle error
+                console.log(err, "error")
+            })
+
+
     }
 
     if (isLoggedIn) {
-        return <Navigate to="/users" />;
+        return <Navigate to="/welcome" />;
     }
 
     return (
         <>
-            {!message && (
-                <div className="form-group">
-                    <div className="alert alert-danger" role="alert">
-                        {message}
-                    </div>
-                </div>
-            )}
             <form className="bg-gray-50 dark:bg-gray-900" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <Branding />
                     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h1 className="text-3xl font-bold underline">
+                            <h1 className="text-3xl font-bold">
                                 Sign in to your account
                             </h1>
                             <div className="space-y-4 md:space-y-6" action="#">
