@@ -24,7 +24,17 @@ export default function UsersPage() {
     const [rowData, setRowData] = useState();
     const [columnDefs, setColumnDefs] = useState([
         {
-            headerName: 'Component By Name',
+            headerName: 'Username',
+            field: 'country',
+            cellRenderer: 'agColName',
+        },
+        {
+            headerName: 'Phone Number',
+            field: 'country',
+            cellRenderer: 'agColName',
+        },
+        {
+            headerName: 'Email',
             field: 'country',
             cellRenderer: 'agColName',
         },
@@ -54,21 +64,17 @@ export default function UsersPage() {
     return (
         <>
             <div style={containerStyle}>
-                <div className="example-wrapper">
-                    <div
-                        style={gridStyle}
-                        className={
-                            "ag-theme-quartz"
-                        }
-                    >
-                        <AgGridReact
-                            rowData={rowData}
-                            columnDefs={columnDefs}
-                            defaultColDef={defaultColDef}
-                            components={components}
-                            onGridReady={onGridReady}
-                        />
-                    </div>
+                <div style={gridStyle}
+                    className={"ag-theme-quartz"
+                    }
+                >
+                    <AgGridReact
+                        rowData={rowData}
+                        columnDefs={columnDefs}
+                        defaultColDef={defaultColDef}
+                        components={components}
+                        onGridReady={onGridReady}
+                    />
                 </div>
             </div>
 

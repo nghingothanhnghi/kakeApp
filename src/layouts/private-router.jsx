@@ -6,8 +6,9 @@ export default function PrivateRouterLayout() {
     const [sidebar, setSidebar] = useState(false);
     return (
         <>
-            <Header sidebar={sidebar} setSidebar={setSidebar} />
-            <div className="flex">
+        <div className="flex flex-col h-full">
+        <Header sidebar={sidebar} setSidebar={setSidebar} />
+            <div className="flex flex-row h-full">
                 {sidebar ? (
                     <div className={`sidebar ${sidebar ? "transform-x-0" : "transform-x-full"}`}>
                         <SideMenu sidebar={sidebar} setSidebar={setSidebar} />
@@ -15,6 +16,7 @@ export default function PrivateRouterLayout() {
                 ) : null}
                 <Outlet />
             </div>
+        </div>
         </>
     );
 }
