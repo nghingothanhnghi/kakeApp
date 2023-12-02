@@ -20,7 +20,14 @@ export default function LoginPage() {
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(clearMessage());
+      }, [dispatch]);
 
+    const initialValues = {
+        username: "",
+        password: "",
+      };
     // form validation rules 
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required'),
@@ -37,7 +44,7 @@ export default function LoginPage() {
         return dispatch(login({ username, password }))
             .unwrap()
             .then((res) => {
-                navigate("/welcome");
+                navigate("/");
                 // window.location.reload();
                 console.log(res, "success")
             })
@@ -50,7 +57,7 @@ export default function LoginPage() {
     }
 
     if (isLoggedIn) {
-        return <Navigate to="/welcome" />;
+        return <Navigate to="/" />;
     }
 
     return (

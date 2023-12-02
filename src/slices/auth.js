@@ -7,9 +7,9 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 export const registeUser = createAsyncThunk(
   "/register",
-  async ({ username, email, password }, thunkAPI) => {
+  async ({ fullname, username, phone_number, password }, thunkAPI) => {
     try {
-      const response = await AuthService.registeUser(username, email, password);
+      const response = await AuthService.registeUser(fullname, username, phone_number, password);
       thunkAPI.dispatch(setMessage(response.data.message));
       return response.data;
     } catch (error) {
@@ -44,6 +44,25 @@ export const login = createAsyncThunk(
   }
 );
 
+export const confirmSignUp = createAsyncThunk(
+  "/success-registeration",
+  async ({ username, confirm_code }, thunkAPI) => {
+    try {
+      const data = await AuthService.login(username, confirm_code);
+      return { user: data };
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
 export const logout = createAsyncThunk("/logout", async () => {
   AuthService.logout();
 });
@@ -61,6 +80,14 @@ const authSlice = createSlice({
     },
     [registeUser.rejected]: (state, action) => {
       state.isLoggedIn = false;
+    },
+    [confirmSignUp.fulfilled]: (state, action) => {
+      state.isLoggedIn = true;
+      state.user = action.payload.user;
+    },
+    [confirmSignUp.rejected]: (state, action) => {
+      state.isLoggedIn = false;
+      state.user = null;
     },
     [login.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
