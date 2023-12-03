@@ -7,7 +7,7 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 export const registeUser = createAsyncThunk(
   "/register",
-  async ({ fullname, username, phone_number, password }, thunkAPI) => {
+  async ({ fullname, username, phone_number,  password }, thunkAPI) => {
     try {
       const response = await AuthService.registeUser(fullname, username, phone_number, password);
       thunkAPI.dispatch(setMessage(response.data.message));
@@ -48,7 +48,7 @@ export const confirmSignUp = createAsyncThunk(
   "/success-registeration",
   async ({ username, confirm_code }, thunkAPI) => {
     try {
-      const data = await AuthService.login(username, confirm_code);
+      const data = await AuthService.confirmSignUp(username, confirm_code);
       return { user: data };
     } catch (error) {
       const message =
@@ -68,7 +68,7 @@ export const logout = createAsyncThunk("/logout", async () => {
 });
 
 const initialState = user
-  ? { isLoggedIn: true, user }
+  ? { isLoggedIn: true, user  }
   : { isLoggedIn: false, user: null };
 
 const authSlice = createSlice({
@@ -82,7 +82,7 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
     },
     [confirmSignUp.fulfilled]: (state, action) => {
-      state.isLoggedIn = true;
+      state.isLoggedIn = false;
       state.user = action.payload.user;
     },
     [confirmSignUp.rejected]: (state, action) => {

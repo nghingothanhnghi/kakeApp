@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 
+import LoadingComponent from "../../components/loading";
 import { Branding } from "../../components/logo";
 
 // import { history } from '../../helpers';
@@ -15,7 +16,7 @@ import { clearMessage } from "../../slices/message";
 
 
 export default function RegisterPage() {
-    const [successful, setSuccessful] = useState(false);
+    // const [successful, setSuccessful] = useState(false);
     const navigate = useNavigate();
     const { message } = useSelector((state) => state.message);
     const dispatch = useDispatch();
@@ -23,12 +24,12 @@ export default function RegisterPage() {
     useEffect(() => {
         dispatch(clearMessage());
       }, [dispatch]);
-    
-      const initialValues = {
-        username: "",
-        email: "",
-        password: "",
-      };
+
+    //   const initialValues = {
+    //     username: "",
+    //     email: "",
+    //     password: "",
+    //   };
 
     // form validation rules 
     const validationSchema = Yup.object().shape({
@@ -58,39 +59,43 @@ export default function RegisterPage() {
 
     async function onSubmit({ fullname, username, phone_number, password, cpassword }) {
         console.log(fullname, username, phone_number, password, cpassword)
-        // try {
-        //     dispatch(registeUser({ fullname, username, phone_number, password, cpassword })).unwrap();
-        //     setSuccessful(true);
-        // } catch (error) {
-        //     setSuccessful(false);
-        // }
-        return dispatch(registeUser({  fullname, username, phone_number, password }))
-        .unwrap()
-        .then((res) => {
-            navigate("/success-registeration");
-            // window.location.reload();
-            console.log(res, "success")
-        })
-        .catch((err) => {
-            // handle error
-            console.log(err, "error")
-        })
+        try {
+            await dispatch(registeUser({ fullname, username, phone_number, password, cpassword })).unwrap();
+
+            // redirect to login page and display success alert
+            navigate('/success-registeration');
+            // dispatch(clearMessage.success({ message: 'Registration successful', showAfterRedirect: true }));
+        } catch (error) {
+            // dispatch(clearMessage.error(error));
+        }
     }
+
+
+    // async function onSubmit({ fullname, username, phone_number, password, cpassword }) {
+    //     console.log(fullname, username, phone_number, password, cpassword)
+    //     // try {
+    //     //     dispatch(registeUser({ fullname, username, phone_number, password, cpassword })).unwrap();
+    //     //     setSuccessful(true);
+    //     // } catch (error) {
+    //     //     setSuccessful(false);
+    //     // }
+    //     return dispatch(registeUser({  fullname, username, phone_number, password }))
+    //     .unwrap()
+    //     .then((res) => {
+    //         navigate("/success-registeration");
+    //         // window.location.reload();
+    //         console.log(res, "success")
+    //     })
+    //     .catch((err) => {
+    //         // handle error
+    //         console.log(err, "error")
+    //     })
+    // }
 
     console.log(onSubmit)
 
     return (
         <>
-            {message && (
-                <div className="form-group">
-                    <div
-                        className={successful ? "alert alert-success" : "alert alert-danger"}
-                        role="alert"
-                    >
-                        {message}
-                    </div>
-                </div>
-            )}
             <section className="bg-gray-50 dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <Branding />
@@ -99,6 +104,14 @@ export default function RegisterPage() {
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Create and account
                             </h1>
+
+                            {message && (
+                                <div className="form-group">
+                                    <div className="alert alert-danger" role="alert">
+                                        {message}
+                                    </div>
+                                </div>
+                            )}
                             <form className="space-y-2 md:space-y-2" onSubmit={handleSubmit(onSubmit)}>
                                 <div>
                                     <label htmlFor="fullname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your FullName</label>
@@ -150,7 +163,7 @@ export default function RegisterPage() {
                                         <label htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
                                     </div>
                                 </div>
-                                <button disabled={isSubmitting} type="submit" className="w-full text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">  {isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>} Create an account</button>
+                                <button disabled={isSubmitting} type="submit" className="flex justify-center w-full text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{isSubmitting && <LoadingComponent width={20} height={20} />} {!isSubmitting && <span>Create an account</span>} </button>
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Already have an account? <Link to="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
                                 </p>

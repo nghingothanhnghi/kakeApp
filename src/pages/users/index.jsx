@@ -65,7 +65,7 @@ export default function UsersPage() {
         <>
             <div style={containerStyle}>
                 <div style={gridStyle}
-                    className={"ag-theme-quartz"
+                    className={"ag-theme-alpine"
                     }
                 >
                     <AgGridReact

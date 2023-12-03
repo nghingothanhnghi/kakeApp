@@ -40,15 +40,23 @@ const confirmSignUp = async (username, confirm_code) => {
 
 
 
-const logout = () => {
+const logout = async () => {
   localStorage.removeItem("user");
+  const response = await axios.post(API_URL + "/login");
+  return response.data;
 };
+
+
+const getCurrentUser = () => {
+  return JSON.parse(localStorage.getItem("user"));
+}
 
 const authService = {
   registeUser,
   confirmSignUp,
   login,
   logout,
+  getCurrentUser,
 };
 
 export default authService;

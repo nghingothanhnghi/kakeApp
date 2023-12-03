@@ -10,6 +10,7 @@ function Alert() {
     const dispatch = useDispatch();
     const location = useLocation();
     const alert = useSelector(x => x.message.value);
+    console.log(alert)
 
     useEffect(() => {
         // clear alert on location change

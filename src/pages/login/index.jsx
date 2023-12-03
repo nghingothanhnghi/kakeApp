@@ -16,18 +16,16 @@ export default function LoginPage() {
     const navigate = useNavigate();
 
     const { isLoggedIn } = useSelector((state) => state.auth);
-    const { message } = useSelector((state) => state.message);
+    const  message  = useSelector(state => state.message);
+
+    console.log(message, "message")
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(clearMessage());
-      }, [dispatch]);
+    }, [dispatch]);
 
-    const initialValues = {
-        username: "",
-        password: "",
-      };
     // form validation rules 
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required'),
@@ -62,6 +60,12 @@ export default function LoginPage() {
 
     return (
         <>
+
+            {!message && (
+                    <div className="alert alert-danger" role="alert">
+                        {message}
+                    </div>
+            )}
             <form className="bg-gray-50 dark:bg-gray-900" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <Branding />
