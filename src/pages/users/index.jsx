@@ -15,10 +15,10 @@ import AgColName from '../../components/ag-grid-component/ag-col-name';
 
 export default function UsersPage() {
     // open this when not authorize
-    // const { user: currentUser } = useSelector((state) => state.auth);
-    // if (!currentUser) {
-    //     return <Navigate to="/login" />;
-    // }
+    const { auth } = useSelector((state) => state.auth);
+    if (!auth) {
+        return <Navigate to="/login" />;
+    }
     const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
     const gridStyle = useMemo(() => ({ height: '100%', width: '100%' }), []);
     const [rowData, setRowData] = useState();

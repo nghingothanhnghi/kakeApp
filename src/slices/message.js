@@ -6,6 +6,21 @@ const messageSlice = createSlice({
   name: "message",
   initialState,
   reducers: {
+    // payload can be a string message ('alert message') or 
+    // an object ({ message: 'alert message', showAfterRedirect: true })
+    // setSuccess: (state, action) => {
+    //     state.value = {
+    //         type: 'alert-success',
+    //         message: action.payload?.message || action.payload
+    //     };
+    // },
+
+    // setError: (state, action) => {
+    //     state.value = {
+    //         type: 'alert-danger',
+    //         message: action.payload?.message || action.payload
+    //     };
+    // },
     setMessage: (state, action) => {
       return { message: action.payload  };
     },
@@ -17,7 +32,7 @@ const messageSlice = createSlice({
 
 const { reducer, actions } = messageSlice;
 
-export const {setMessage, clearMessage } = actions
+export const {setSuccess, setError, setMessage, clearMessage } = actions
 export default reducer;
 
 

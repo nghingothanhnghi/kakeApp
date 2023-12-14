@@ -3,11 +3,17 @@ import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function DefaultPage() {
-  const { user: currentUser } = useSelector((state) => state.auth);
+      // open this when not authorize
+      const { auth } = useSelector((state) => state.auth);
+      console.log(auth, "user")
+      if (!auth) {
+          return <Navigate to="/login" />;
+      }
   return (
     <>
       <div>
-        <header className="jumbotron">
+        default
+        {/* <header className="jumbotron">
           <div className="container">
             <header className="jumbotron">
               <h3>
@@ -19,7 +25,7 @@ export default function DefaultPage() {
               {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
             </p>
           </div>
-        </header>
+        </header> */}
 
       </div>
     </>

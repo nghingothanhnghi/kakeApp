@@ -1,6 +1,26 @@
 
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../slices/auth";
 export default function Header({ sidebar, setSidebar }) {
+    const { user: currentUser } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+
+    const logOut = useCallback(() => {
+        dispatch(logout());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (currentUser) {
+            //   setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
+            //   setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
+        } else {
+            //   setShowModeratorBoard(false);
+            //   setShowAdminBoard(false);
+        }
+    }, [currentUser]);
+
     return (
         <>
             <header className="px-4 max-w-desktop mx-auto text-blacklight">
@@ -11,6 +31,41 @@ export default function Header({ sidebar, setSidebar }) {
                             FAB <br />
                             SYSTEMS
                         </h2>
+                        {currentUser && (
+                            <li className="nav-item">
+                                <Link to={"/user"} className="nav-link">
+                                    User
+                                </Link>
+                            </li>
+                        )}
+                         {currentUser ? (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/profile"} className="nav-link">
+                  {currentUser.username}
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={logOut}>
+                  LogOut
+                </a>
+              </li>
+            </div>
+          ) : (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/login"} className="nav-link">
+                  Login
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={"/register"} className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+            </div>
+          )}
                     </div>
                     <div className="lg:hidden">
                         <svg
@@ -23,9 +78,9 @@ export default function Header({ sidebar, setSidebar }) {
                             xmlns="http://www.w3.org/2000/svg"
                         >
                             <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
                                 d="M4 6h16M4 12h16M4 18h16"
                             ></path>
                         </svg>
