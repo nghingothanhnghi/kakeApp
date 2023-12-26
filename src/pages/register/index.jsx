@@ -88,53 +88,53 @@ export default function RegisterPage({ email }) {
 
     return (
         <>
-            <section className="bg-gray-50">
+            <section className="bg-gray-50 dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <Branding />
-                    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+                    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h1 className="text-xl font-bold leading-tight tracking-tight">
+                            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 New account
                             </h1>
-                            <form className="space-y-2 md:space-y-2" onSubmit={handleSubmit(onSubmit)}>
+                            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
                                 <div>
-                                    <label htmlFor="fullname" className="block mb-2 text-sm font-bold">Your FullName</label>
-                                    <input type="text" name="fullname" {...register('fullname')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 ${errors.fullname ? 'is-invalid ' : ''}`} required="" />
+                                    <label htmlFor="fullname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your FullName</label>
+                                    <input type="text" name="fullname" {...register('fullname')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.fullname ? 'is-invalid ' : ''}`} required="" />
                                     <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.fullname?.message}</div>
                                 </div>
                                 <div className="flex flex-row gap-x-2">
                                     <div className="basis-1/2">
                                         <div>
-                                            <label htmlFor="email" className="block mb-2 text-sm font-bold">Your email</label>
-                                            <input value={email} type="email" name="email" {...register('email')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  ${errors.email ? 'is-invalid ' : ''}`} />
+                                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                                            <input value={email} type="email" name="email" {...register('email')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  ${errors.email ? 'is-invalid ' : ''}`} />
                                             <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.email?.message}</div>
                                         </div>
                                     </div>
                                     <div className="basis-1/2">
                                         <div>
-                                            <label htmlFor="phone_number" className="block mb-2 text-sm font-bold">Your phone</label>
-                                            <input type="phone" name="phone_number" {...register('phone_number')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  ${errors.phone_number ? 'is-invalid' : ''}`} />
+                                            <label htmlFor="phone_number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your phone</label>
+                                            <input type="phone" name="phone_number" {...register('phone_number')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  ${errors.phone_number ? 'is-invalid' : ''}`} />
                                             <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.phone_number?.message}</div>
                                         </div>
                                     </div>
                                 </div>
                                 {/* <div>
-                                    <label htmlFor="username" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Username</label>
+                                    <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                                     <input type="text" name="username" {...register('username')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.username ? 'is-invalid' : ''}`} />
                                     <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.username?.message}</div>
                                 </div> */}
                                 <div className="flex flex-row gap-x-2">
                                     <div className="basis-1/2">
                                         <div>
-                                            <label htmlFor="password" className="block mb-2 text-sm font-bold">Password</label>
-                                            <input type="password" name="password" {...register('password')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 ${errors.password ? 'is-invalid' : ''}`} />
+                                            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                            <input type="password" name="password" {...register('password')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.password ? 'is-invalid' : ''}`} />
                                             <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.password?.message}</div>
                                         </div>
                                     </div>
                                     <div className="basis-1/2">
                                         <div>
-                                            <label htmlFor="cpassword" className="block mb-2 text-sm font-bold">Confirm password</label>
-                                            <input type="password" name="cpassword" {...register('cpassword')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 ${errors.cpassword ? 'is-invalid' : ''}`} />
+                                            <label htmlFor="cpassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+                                            <input type="password" name="cpassword" {...register('cpassword')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.cpassword ? 'is-invalid' : ''}`} />
                                             <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.cpassword?.message}</div>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@ export default function RegisterPage({ email }) {
                                         <input checked disabled {...register("term_policy", { required: true })} type="checkbox" className="w-4 h-4 border border-gray-300 rounded" />
                                     </div>
                                     <div className="ml-3 text-sm">
-                                        <label htmlFor="terms" className="font-light ">I accept the <a className="font-medium" href="#">Terms and Conditions</a></label>
+                                        <label htmlFor="terms" className="text-gray-500 dark:text-gray-300">I accept the <a className="font-medium" href="#">Terms and Conditions</a></label>
                                     </div>
                                 </div>
                                 <div className='flex my-5'>
