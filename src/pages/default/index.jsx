@@ -6,13 +6,13 @@ export default function DefaultPage() {
       // open this when not authorize
       const { user: currentUser } = useSelector((state) => state.auth);
       console.log(currentUser, "user")
-      if (!auth) {
-          return <Navigate to="/login" />;
-      }
+      // if (!currentUser) {
+      //     return <Navigate to="/login" />;
+      // }
   return (
     <>
       <div>
-        default
+        default 
         {/* <header className="jumbotron">
           <div className="container">
             <header className="jumbotron">

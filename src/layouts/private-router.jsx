@@ -18,7 +18,7 @@ export default function PrivateRouterLayout() {
         <Header sidebar={sidebar} setSidebar={setSidebar} />
             <div className="flex flex-row h-full">
                 {sidebar ? (
-                    <div className={`sidebar ${sidebar ? "transform-x-0" : "transform-x-full"}`}>
+                    <div className={`sidebar z-40 w-64 h-screen transition-transform  ${sidebar ? "transform-none" : "-translate-x-full"}`}>
                         <SideMenu sidebar={sidebar} setSidebar={setSidebar} />
                     </div>
                 ) : null}

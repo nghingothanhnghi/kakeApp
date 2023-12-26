@@ -1,4 +1,4 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
@@ -13,12 +13,14 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <ToastContextProvider>
-        <App />
-      </ToastContextProvider>
-    </BrowserRouter>
-  </Provider>
+  <StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ToastContextProvider>
+          <App />
+        </ToastContextProvider>
+      </BrowserRouter>
+    </Provider>
+  </StrictMode>
 );
 
