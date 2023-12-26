@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 
 export default function DefaultPage() {
       // open this when not authorize
-      const { auth } = useSelector((state) => state.auth);
-      console.log(auth, "user")
+      const { user: currentUser } = useSelector((state) => state.auth);
+      console.log(currentUser, "user")
       if (!auth) {
           return <Navigate to="/login" />;
       }

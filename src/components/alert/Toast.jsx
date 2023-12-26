@@ -1,24 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useToast } from "../../hooks/useToast";
+import ToastIcon from "./ToastIcons";
 
 const toastTypes = {
   success: {
-    icon: "<IconCircleCheckFilled />",
+    icon: <ToastIcon size={100} color="green" />,
     iconClass: "success-icon",
     progressBarClass: "success",
   },
   warning: {
-    icon: "<IconAlertCircleFilled />",
+    icon: <ToastIcon size={100} color="orange" />,
     iconClass: "warning-icon",
     progressBarClass: "warning",
   },
   info: {
-    icon: "<IconInfoCircleFilled />",
+    icon: <ToastIcon size={100} color="blue" />,
     iconClass: "info-icon",
     progressBarClass: "info",
   },
   error: {
-    icon: "<IconCircleXFilled />",
+    icon: <ToastIcon size={100} color="red" />,
     iconClass: "error-icon",
     progressBarClass: "error",
   },

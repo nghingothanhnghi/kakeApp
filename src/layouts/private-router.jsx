@@ -6,8 +6,8 @@ import SideMenu from "./side";
 export default function PrivateRouterLayout() {
     const [sidebar, setSidebar] = useState(false);
     // check authorized
-    const auth = useSelector(state => state.auth);
-    
+    const auth = useSelector((state) => state.auth);
+    console.log(auth, "user")
     if (!auth) {
         // not logged in so redirect to login page with the return url
         return <Navigate to="/login" />
