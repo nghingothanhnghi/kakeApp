@@ -14,7 +14,9 @@ import { registeUser } from "../../slices/auth";
 import { clearMessage } from "../../slices/message";
 
 
-export default function RegisterPage({email}) {
+export default function RegisterPage({ email }) {
+
+
     const navigate = useNavigate();
     const toast = useToast();
     const { message } = useSelector(state => state.message);
@@ -38,7 +40,7 @@ export default function RegisterPage({email}) {
             .matches(/^(?=.*[0-9])/, 'Must contain at least one number')
             .matches(/^(?=.*[!@#%&])/, 'Must contain at least one special character')
             .min(8, 'Password must be at least 8 characters'),
-            
+
         cpassword: Yup.string()
             .required("Confirm Password is required")
             .min(8, 'Password must be at least 8 characters')
@@ -53,10 +55,10 @@ export default function RegisterPage({email}) {
             fullname: '',
             email: '',
             phone_number: '',
-            password:'',
+            password: '',
             term_policy: [],
             // radio: ''
-          }
+        }
     });
     const { errors, isSubmitting } = formState;
 
@@ -65,18 +67,18 @@ export default function RegisterPage({email}) {
         console.log(fullname, email, phone_number, password, cpassword)
         try {
             await dispatch(registeUser({ fullname, email, phone_number, password, cpassword })).unwrap()
-            .then((res) => {
-                console.log(res.message);
-                if (res.error === true) {
-                  console.log(`Username ${email} exists!`);
-                  toast.error(res.message)
-                } else {
-                  console.log(`Username ${email} does not exist.`);
-                  toast.success(res.message)
-                  navigate(`/success-registeration?email=${email}`);
-                  // redirect to login page and display success alert
-                }
-              })   
+                .then((res) => {
+                    console.log(res.message);
+                    if (res.error === true) {
+                        console.log(`Username ${email} exists!`);
+                        toast.error(res.message)
+                    } else {
+                        console.log(`Username ${email} does not exist.`);
+                        toast.success(res.message)
+                        navigate(`/success-registeration?email=${email}`);
+                        // redirect to login page and display success alert
+                    }
+                })
         } catch (err) {
             console.log(err.message, "message response error")
             toast.error(err.message)
@@ -96,42 +98,42 @@ export default function RegisterPage({email}) {
                             </h1>
                             <form className="space-y-2 md:space-y-2" onSubmit={handleSubmit(onSubmit)}>
                                 <div>
-                                    <label htmlFor="fullname" className="block mb-2 text-sm font-medium">Your FullName</label>
+                                    <label htmlFor="fullname" className="block mb-2 text-sm font-bold">Your FullName</label>
                                     <input type="text" name="fullname" {...register('fullname')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 ${errors.fullname ? 'is-invalid ' : ''}`} required="" />
                                     <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.fullname?.message}</div>
                                 </div>
                                 <div className="flex flex-row gap-x-2">
                                     <div className="basis-1/2">
                                         <div>
-                                            <label htmlFor="email" className="block mb-2 text-sm font-medium">Your email</label>
+                                            <label htmlFor="email" className="block mb-2 text-sm font-bold">Your email</label>
                                             <input value={email} type="email" name="email" {...register('email')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  ${errors.email ? 'is-invalid ' : ''}`} />
                                             <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.email?.message}</div>
                                         </div>
                                     </div>
                                     <div className="basis-1/2">
                                         <div>
-                                            <label htmlFor="phone_number" className="block mb-2 text-sm font-medium">Your phone</label>
+                                            <label htmlFor="phone_number" className="block mb-2 text-sm font-bold">Your phone</label>
                                             <input type="phone" name="phone_number" {...register('phone_number')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  ${errors.phone_number ? 'is-invalid' : ''}`} />
                                             <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.phone_number?.message}</div>
                                         </div>
                                     </div>
                                 </div>
                                 {/* <div>
-                                    <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                                    <label htmlFor="username" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Username</label>
                                     <input type="text" name="username" {...register('username')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.username ? 'is-invalid' : ''}`} />
                                     <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.username?.message}</div>
                                 </div> */}
                                 <div className="flex flex-row gap-x-2">
                                     <div className="basis-1/2">
                                         <div>
-                                            <label htmlFor="password" className="block mb-2 text-sm font-medium">Password</label>
+                                            <label htmlFor="password" className="block mb-2 text-sm font-bold">Password</label>
                                             <input type="password" name="password" {...register('password')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 ${errors.password ? 'is-invalid' : ''}`} />
                                             <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.password?.message}</div>
                                         </div>
                                     </div>
                                     <div className="basis-1/2">
                                         <div>
-                                            <label htmlFor="cpassword" className="block mb-2 text-sm font-medium">Confirm password</label>
+                                            <label htmlFor="cpassword" className="block mb-2 text-sm font-bold">Confirm password</label>
                                             <input type="password" name="cpassword" {...register('cpassword')} className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 ${errors.cpassword ? 'is-invalid' : ''}`} />
                                             <div className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.cpassword?.message}</div>
                                         </div>
@@ -145,7 +147,16 @@ export default function RegisterPage({email}) {
                                         <label htmlFor="terms" className="font-light ">I accept the <a className="font-medium" href="#">Terms and Conditions</a></label>
                                     </div>
                                 </div>
-                                <button disabled={isSubmitting} className="flex justify-center w-full text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{isSubmitting && <LoadingComponent width={20} height={20} />} {!isSubmitting && <span>Create an account</span>} </button>
+                                <div className='flex my-5'>
+                                    <button onClick={() => navigate(-1)} className='text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 me-2'>
+                                        <svg className="w-4 h-4 me-2 -ms-1 text-[#626890]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+                                        </svg>
+                                        Back
+                                    </button>
+                                    <button disabled={isSubmitting} className="flex justify-center w-full text-white bg-orange-600 hover:bg-orange-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{isSubmitting && <LoadingComponent width={20} height={20} />} {!isSubmitting && <span>Create an account</span>} </button>
+                                </div>
+
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Already have an account? <Link to="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
                                 </p>
