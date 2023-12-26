@@ -25,6 +25,12 @@ export default function Header({ sidebar, setSidebar }) {
     <>
       <header className="bg-white border-gray-200 dark:bg-gray-900">
         <nav className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <button onClick={() => setSidebar(true)} type="button" className="lg:hidden text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+              </svg>
+
+            </button>
           <a className="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
@@ -73,24 +79,6 @@ export default function Header({ sidebar, setSidebar }) {
                 </>
               )}
             </ul>
-          </div>
-          <div className="lg:hidden">
-            <svg
-              className="w-8 h-8 lg:hidden"
-              id="hamburger"
-              onClick={() => setSidebar(true)}
-              fill="none"
-              stroke="#354650"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
           </div>
         </nav>
       </header>
